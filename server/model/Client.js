@@ -1,4 +1,4 @@
-import mongoose, { Mongoose } from "mongoose";
+const mongoose = require('mongoose')
 
 const clientSchema = new mongoose.Schema({
     name:{
