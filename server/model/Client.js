@@ -6,8 +6,7 @@ const clientSchema = new mongoose.Schema({
     },
     email:{
         type:String
-    },
-    phone:{
+    },    phone:{
         type:String
     }
 })

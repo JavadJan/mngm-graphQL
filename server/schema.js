@@ -3,7 +3,9 @@ const { GraphQLID,
     GraphQLSchema,
     GraphQLObjectType,
     GraphQLString,
-    GraphQLList } = require('graphql')
+    GraphQLList,
+    GraphQLEnumType,
+    GraphQLNonNull } = require('graphql')
 const { clients, projects } = require('./dumyData.js')
 
 const Project = require('./model/Project.js')
@@ -79,15 +81,15 @@ const myMutation = new GraphQLObjectType({
         addClient: {
             type: clientType,
             args: {
-                name: { type: GraphQLString },
-                email: { type: GraphQLString },
-                phone: { type: GraphQLString }
+                name: { type: new GraphQLNonNull(GraphQLString) },
+                email: { type: new GraphQLNonNull(GraphQLString) },
+                phone: { type: new GraphQLNonNull(GraphQLString) }
             },
             resolve(parent, args) {
                 const client = new Client({
                     name: args.name,
                     email: args.email,
-                    phone: args.email
+                    phone: args.phone
                 })
                 return client.save()
             }
@@ -104,16 +106,18 @@ const myMutation = new GraphQLObjectType({
         updateClient: {
             type: clientType,
             args: {
-                id: { type: GraphQLID },
+                id: { type: new GraphQLNonNull(GraphQLID) },
                 name: { type: GraphQLString },
                 email: { type: GraphQLString },
                 phone: { type: GraphQLString },
             },
             resolve(parent, args) {
                 return Client.findByIdAndUpdate(args.id, {
-                    name: args.name,
-                    email: args.email,
-                    phone: args.phone,
+                    $set: {
+                        name: args.name,
+                        email: args.email,
+                        phone: args.phone,
+                    }
                 });
             }
         },
@@ -123,7 +127,18 @@ const myMutation = new GraphQLObjectType({
             args: {
                 name: { type: GraphQLString },
                 description: { type: GraphQLString },
-                status: { type: GraphQLString },
+                status: {
+                    type: new GraphQLEnumType({
+                        name: "projectStatus",
+                        values: {
+                            new: { value: 'Not Started' },
+                            progress: { value: 'In Progress' },
+                            completed: { value: 'Completed' },
+                        },
+
+                    }),
+                    defaultValue: 'Not Started',
+                },
                 clientId: { type: GraphQLString }
             },
             resolve(parent, args) {
@@ -151,16 +166,30 @@ const myMutation = new GraphQLObjectType({
                 id: { type: GraphQLID },
                 name: { type: GraphQLString },
                 description: { type: GraphQLString },
-                status: { type: GraphQLString },
+                status: {
+                    type: new GraphQLEnumType({
+                        name: 'updateProject',
+                        values: {
+                            new: { value: 'Not Started' },
+                            progress: { value: 'In Progress' },
+                            completed: { value: 'Completed' },
+                        }
+                    }),
+                    defaultValue: 'Not Started!',
+                },
                 clientId: { type: GraphQLString }
             },
             resolve(parent, args) {
                 return Project.findByIdAndUpdate(args.id, {
-                    name: args.name,
-                    description: args.description,
-                    status: args.status,
-                    clientId: args.clientId
-                }
+                    $set: {
+                        name: args.name,
+                        description: args.description,
+                        status: args.status,
+                        clientId: args.clientId
+
+                    }
+                },
+                    { new: true }
                 )
             }
         },
