@@ -97,7 +97,7 @@ const myMutation = new GraphQLObjectType({
         deleteClient: {
             type: clientType,
             args: {
-                id: { type: GraphQLID }
+                id: { type: new GraphQLNonNull(GraphQLID) }
             },
             resolve(parent, args) {
                 return Client.findByIdAndDelete(args.id)

@@ -1,0 +1,36 @@
+import React from 'react'
+import { GET_CLIENT } from './clientQuery'
+import { ClientRow } from './ClientRow';
+import { useQuery } from '@apollo/client';
+
+export const Client = () => {
+    const { loading, error, data } = useQuery(GET_CLIENT)
+    console.log(data)
+    if (loading) return <p>loading ...</p>
+    if (error) return <p>something went wrong!</p>
+
+    return (
+        <>
+            <table className="table table-striped table-hover mt-3 w-100">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        data && data.clients.map((client , i) => {
+                            return <ClientRow client={client} key={i}/>
+                        })
+                    }
+                </tbody>
+            </table>
+        </>
+    )
+
+}
+
+
