@@ -5,7 +5,7 @@ import { DELETE_CLIENT, GET_CLIENT } from './clientQuery';
 
 export const ClientRow = ({ client }) => {
     const [deleteClient] = useMutation(DELETE_CLIENT);
-    const { loading, error, data } = useQuery(GET_CLIENT)
+    // const { loading, error, data } = useQuery(GET_CLIENT)
 
 
     const handleDelete = (id) => {
@@ -24,7 +24,7 @@ export const ClientRow = ({ client }) => {
                 <td>{client.name}</td>
                 <td>{client.email}</td>
                 <td>{client.phone}</td>
-                <td className='cursor-pointer' role="button"><FaTrash onClick={() => handleDelete(client.id)} /></td>
+                <td className='cursor-pointer' role="button"><FaTrash className='text-danger' onClick={() => handleDelete(client.id)} /></td>
             </tr>
 
         </>

@@ -6,8 +6,14 @@ import { useQuery } from '@apollo/client';
 export const Client = () => {
     const { loading, error, data } = useQuery(GET_CLIENT)
     console.log(data)
-    if (loading) return <p>loading ...</p>
+    if (loading) return (
+        <div className="spinner-border position-absolute top-50 start-50" role="status">
+            <span className="visually-hidden">Loading...</span>
+        </div>
+    )
+
     if (error) return <p>something went wrong!</p>
+
 
     return (
         <>
@@ -22,8 +28,8 @@ export const Client = () => {
                 </thead>
                 <tbody>
                     {
-                        data && data.clients.map((client , i) => {
-                            return <ClientRow client={client} key={i}/>
+                        data && data.clients.map((client, i) => {
+                            return <ClientRow client={client} key={i} />
                         })
                     }
                 </tbody>

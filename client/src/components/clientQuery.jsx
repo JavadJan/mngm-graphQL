@@ -22,5 +22,15 @@ mutation($id:ID!){
   }
 }
 `
+const ADD_ClIENT_MUTATION =
+  gql`
+mutation($name:String! ,  $email:String!, $phone:String!){
+  addClient(name:$name , email:$email , phone:$phone){
+    name
+    email
+    phone
+  }
+}
+`
 
-export { GET_CLIENT, DELETE_CLIENT }
+export { GET_CLIENT, DELETE_CLIENT , ADD_ClIENT_MUTATION }
