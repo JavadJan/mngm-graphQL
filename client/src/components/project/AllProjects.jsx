@@ -15,9 +15,9 @@ export const Projects = () => {
         return (<p>something went wrong!</p>)
     }
     return (
-        <div className='mt-4'>
-            {data.projects.map((project) =>
-                <ProjectCard project={project} />
+        <div className='card-group mt-4 d-flex justify-content-between gap-2'>
+            {data.projects.map((project, i) =>
+                <ProjectCard project={project} key={i} />
             )}
         </div>
     )

@@ -26,11 +26,11 @@ function App() {
 
       <Header />
       <div className="container">
+        <Projects />
+        <hr className="mt-4 mb-4" />
         <Button variant="primary" onClick={handleShow}>
           Add New
         </Button>
-        <Projects />
-        <hr className="mt-4 mb-4"/>
         <AddClient show={show} setShow={setShow} />
         <Client />
       </div>
