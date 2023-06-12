@@ -1,5 +1,5 @@
 import React from 'react'
-import { GET_CLIENT } from './clientQuery'
+import { GET_CLIENT } from '../queries/clientQuery'
 import { ClientRow } from './ClientRow';
 import { useQuery } from '@apollo/client';
 

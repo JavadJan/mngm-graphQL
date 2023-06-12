@@ -1,14 +1,16 @@
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import 'bootstrap/dist/css/bootstrap.css';
 import Header from "./components/Header";
-import { Client } from "./components/Clients";
+import { Client } from "./components/client/Clients";
 import { useState } from "react";
-import { AddClient } from "./components/AddClient";
+import { AddClient } from "./components/client/AddClient";
 import Button from 'react-bootstrap/Button';
+import { Projects } from "./components/project/AllProjects";
+
 
 const connect = new ApolloClient({
   uri: 'http://localhost:8000/graphql',
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache()
 })
 
 
@@ -27,8 +29,9 @@ function App() {
         <Button variant="primary" onClick={handleShow}>
           Add New
         </Button>
+        <Projects />
+        <hr className="mt-4 mb-4"/>
         <AddClient show={show} setShow={setShow} />
-
         <Client />
       </div>
     </ApolloProvider>

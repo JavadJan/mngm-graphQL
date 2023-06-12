@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useMutation } from '@apollo/client';
-import { ADD_ClIENT_MUTATION, GET_CLIENT } from './clientQuery';
+import { ADD_ClIENT_MUTATION, GET_CLIENT } from '../queries/clientQuery';
 
 
 export const AddClient = ({ setShow, show }) => {
@@ -35,9 +35,22 @@ export const AddClient = ({ setShow, show }) => {
         email: client.email,
         phone: client.phone
       },
-      //after add the book the query will refetch to update book list
-      refetchQueries: [{ query: GET_CLIENT }]
+      //===>after add the book the query will refetch to update book list
+      // refetchQueries: [{ query: GET_CLIENT }]
+
+      //===>in other  way to update cache:
+      update(cache, { data: addClient }) {
+        //===>read from the cache
+        const { clients } = cache.readQuery({ query: GET_CLIENT });
+        //===> write to cache
+        cache.writeQuery({
+          query: GET_CLIENT,
+          //it equals to clients.concat([addClient])
+          data: { clients: [...clients, addClient] }
+        });
+      }
     });
+    setClient('')
     setShow(false)
   }
 
