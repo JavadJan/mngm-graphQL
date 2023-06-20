@@ -1,12 +1,11 @@
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import 'bootstrap/dist/css/bootstrap.css';
 import Header from "./components/Header";
-import { Client } from "./components/client/Clients";
-import { useState } from "react";
-import { AddClient } from "./components/client/AddClient";
-import Button from 'react-bootstrap/Button';
-import { Projects } from "./components/project/AllProjects";
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Home } from "./pages/Home";
+import { NotFound } from "./pages/NotFound";
+import { Project } from "./pages/Project";
 
 const connect = new ApolloClient({
   uri: 'http://localhost:8000/graphql',
@@ -17,23 +16,22 @@ const connect = new ApolloClient({
 
 function App() {
 
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
+
 
   return (
 
     <ApolloProvider client={connect}>
 
       <Header />
-      <div className="container">
-        <Projects />
-        <hr className="mt-4 mb-4" />
-        <Button variant="primary" onClick={handleShow}>
-          Add New
-        </Button>
-        <AddClient show={show} setShow={setShow} />
-        <Client />
-      </div>
+      <BrowserRouter>
+        <div className="container">
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='*' element={<NotFound />} />
+            <Route path='/project/:id' element={<Project />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </ApolloProvider>
   );
 }

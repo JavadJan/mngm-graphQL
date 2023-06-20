@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
-export const ProjectCard = ({ project }) => {
+export const ProjectCard = ({ project }) => {    
+
     return (
         <div className='col-md-2'>
             <div className="card mb-3">
