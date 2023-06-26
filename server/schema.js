@@ -129,7 +129,7 @@ const myMutation = new GraphQLObjectType({
                 description: { type: GraphQLString },
                 status: {
                     type: new GraphQLEnumType({
-                        name: "projectStatus",
+                        name: "ProjectStatus",
                         values: {
                             new: { value: 'Not Started' },
                             progress: { value: 'In Progress' },
@@ -139,7 +139,7 @@ const myMutation = new GraphQLObjectType({
                     }),
                     defaultValue: 'Not Started',
                 },
-                clientId: { type: GraphQLString }
+                clientId: { type: new GraphQLNonNull(GraphQLString) }
             },
             resolve(parent, args) {
                 const project = new Project({
@@ -160,6 +160,7 @@ const myMutation = new GraphQLObjectType({
                 return Project.findByIdAndDelete(args.id)
             }
         },
+        
         updateProject: {
             type: ProjectType,
             args: {
@@ -168,7 +169,7 @@ const myMutation = new GraphQLObjectType({
                 description: { type: GraphQLString },
                 status: {
                     type: new GraphQLEnumType({
-                        name: 'updateProject',
+                        name: 'UpdateProjectStatus',
                         values: {
                             new: { value: 'Not Started' },
                             progress: { value: 'In Progress' },

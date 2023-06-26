@@ -1,8 +1,6 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 
-export const ProjectCard = ({ project }) => {    
-
+export const ProjectCard = ({ project }) => {
     return (
         <div className='col-md-2'>
             <div className="card mb-3">
@@ -13,6 +11,7 @@ export const ProjectCard = ({ project }) => {
                         </h5>
                         <a href={`/project/${project.id}`}>View</a>
                     </div>
+                    <p>{project.description.substring(0, 30)} ...</p>
                     <p className='small'>
                         Status: <strong>{project.status}</strong>
                     </p>

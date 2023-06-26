@@ -17,7 +17,7 @@ export const Projects = () => {
     }
     
     return (
-        <div  className='card-group mt-4 d-flex justify-content-between gap-2'>
+        <div  className='card-group mt-4 overflow-scroll d-flex justify-content-start gap-2'>
             {data.projects.map((project, i) =>
                 <ProjectCard project={project} key={i} />
             )}
