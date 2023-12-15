@@ -12,8 +12,6 @@ const connect = new ApolloClient({
   cache: new InMemoryCache()
 })
 
-
-
 function App() {
 
 
