@@ -7,7 +7,7 @@ import { GET_CLIENT } from '../queries/clientQuery';
 import { ADD_PROJECT, GET_PROJECTS } from '../queries/projectQuery';
 
 export const AddProject = ({ setShow, show }) => {
-    const { loading, data, error } = useQuery(GET_CLIENT)
+    const { loading, data } = useQuery(GET_CLIENT)
 
     const handleClose = () => setShow(false);
 

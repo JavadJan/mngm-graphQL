@@ -2,7 +2,6 @@ import React from 'react'
 import { ProjectCard } from './ProjectCard'
 import { useQuery } from '@apollo/client'
 import { GET_PROJECTS } from '../queries/projectQuery'
-import { useNavigate } from 'react-router-dom'
 
 export const Projects = () => {
     const { loading, error, data } = useQuery(GET_PROJECTS)

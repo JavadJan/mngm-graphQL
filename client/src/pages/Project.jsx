@@ -4,7 +4,7 @@ import { GET_PROJECT } from '../components/queries/projectQuery'
 import { useParams } from 'react-router-dom';
 import { ClientInfo } from '../components/client/ClientInfo';
 import { DeleteProject } from '../components/project/DeleteProject';
-import { EditProject } from '../components/project/EditProject';
+// import { EditProject } from '../components/project/EditProject';
 import { ButtonEdit } from '../components/project/ButtonEdit';
 
 export const Project = () => {

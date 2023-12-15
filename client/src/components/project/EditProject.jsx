@@ -12,7 +12,7 @@ export const EditProject = ({ show, setShow, project }) => {
     const [status, setStatus] = useState(project.status)
     const [clientId, setClientId] = useState(project.client.id)
 
-    const { loading, data, error } = useQuery(GET_CLIENT)
+    const { loading, data } = useQuery(GET_CLIENT)
     const [updateProject] = useMutation(EDIT_PROJECT)
 
     const handleClose = () => setShow(false);
